@@ -1,0 +1,68 @@
+package main
+
+import "fmt"
+
+type node struct {
+	data     int
+	nextNode *node
+}
+
+type linkedList struct {
+	head *node
+}
+
+func (l *linkedList) printList() {
+	current := l.head
+	for current != nil {
+		fmt.Printf("%d -> ", current.data)
+		current = current.nextNode
+	}
+	fmt.Println("nil")
+}
+
+func (l *linkedList) appendNode(n *node) {
+	if l.head == nil {
+		l.head = n
+	} else {
+		current := l.head
+		for current.nextNode != nil {
+			current = current.nextNode
+		}
+		current.nextNode = n
+	}
+}
+
+func (l *linkedList) prependNode(n *node) {
+	oldHead := l.head
+	l.head = n
+	l.head.nextNode = oldHead
+}
+
+func main() {
+	myList := linkedList{}
+
+	var aNodes []*node
+	var pNodes []*node
+
+	for i := 2; i < 100; i += 2 {
+		aNodes = append(aNodes, &node{
+			data: i,
+		})
+	}
+
+	for i := 1; i < 100; i += 3 {
+		pNodes = append(pNodes, &node{
+			data: i,
+		})
+	}
+
+	for i := 0; i < len(aNodes); i++ {
+		myList.appendNode(aNodes[i])
+	}
+
+	for j := 0; j < len(pNodes); j++ {
+		myList.prependNode(pNodes[j])
+	}
+
+	myList.printList()
+}
