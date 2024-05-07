@@ -4,26 +4,24 @@ with pkgs;
 
 mkShell {
   buildInputs = [
-    go
+    # shell
     zsh
-    gotools
+    # golang
+    go
     gopls
-    go-outline
-    gocode
-    gopkgs
-    gocode-gomod
-    godef
-    golint
+    golangci-lint
+    gofumpt
+    # web
     fnm
     nodejs
     yarn
-    rnix-lsp
+    # unix-tools
     fd
-    golangci-lint
+    ripgrep
   ];
   shellHook = ''
     export GIT_CONFIG_NOSYSTEM=true
-    export GIT_CONFIG_SYSTEM="$HOME/Projects/git/config/github_global"
-    export GIT_CONFIG_GLOBAL="$HOME/Projects/git/config/github_global"
+    export GIT_CONFIG_SYSTEM="/home/grim_reaper/Projects/configs/github/github_global"
+    export GIT_CONFIG_GLOBAL="/home/grim_reaper/Projects/configs/github/github_global"
   '';
 }
